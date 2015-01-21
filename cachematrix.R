@@ -5,7 +5,9 @@
 ## For these functions, we assume that the matrix supplied is always invertible.
 
 
-## makeCacheMatrix creates a matrix that can cache its inverse.
+## makeCacheMatrix creates a matrix that can cache its inverse. It does this by 
+## defining 'set' as a function within another function, thereby putting 'y', 'x', 
+## and 'm' in a different environment than the global environment.
 
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL   
@@ -13,9 +15,7 @@ makeCacheMatrix <- function(x = matrix()) {
     x <<- y
     m <<- NULL
   }
-  get <- function() x
-
-## use the solve function to create an inverse matrix  
+  get <- function() x 
   setinverse <- function(solve) m <<- solve
   getinverse <- function() m
   list(set = set, get = get,
